@@ -1,7 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import logo from "./components/icon/65dde509e42c9.png";
 
 const Navbar = () => {
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleInputChange = (event) => {
+    setSearchValue(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Search value:", searchValue);
+  };
+
   return (
     <nav className="bg-black p-4 flex justify-between items-center sticky top-0 z-10">
       <div className="flex items-center">
@@ -24,20 +35,33 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="flex items-center">
-        <button className="flex items-center mr-4 bg-blue-600 px-4 py-2 rounded-full text-white font-semibold">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} 
-            stroke="currentColor" className="w-8 h-8 mr-2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-          </svg>
-          Search
-        </button>
+      <form onSubmit={handleSubmit} className="flex items-center mr-6 ">
+          <div className="relative">
+            <input
+              type="text"
+              value={searchValue}
+              onChange={handleInputChange}
+              placeholder="Search here. . ."
+              className="px-12 py-3 rounded-full border border-white hover:ring-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="submit"
+              className="absolute inset-y-0 right-0 px-4 py-1 border border-white bg-blue-600 rounded-full text-white font-semibold"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/>
+              </svg>
+            </button>
+          </div>
+        </form>
 
         <button className="flex items-center mr-4 bg-red-600 px-4 py-2 rounded-full text-white font-semibold">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
             stroke="currentColor" className="w-8 h-8 mr-2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
           </svg>
-          Sign In
+          Sign in
         </button>
       </div>
     </nav>
